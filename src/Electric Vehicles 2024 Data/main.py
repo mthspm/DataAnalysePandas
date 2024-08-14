@@ -4,18 +4,20 @@ import matplotlib.pyplot as plt
 
 df: pd.DataFrame = pd.read_csv("IEA Global EV Data 2024.csv")
 
-#######DEBUG#######
+def debug_df():
+    #######DEBUG#######
 
-#print(df.head())
-#print(df.columns.unique())
-#print(df['region'].unique())
-#print(df['category'].unique())
-#print(df['parameter'].unique())
-#print('mode', df['mode'].unique())
-#print(df['powertrain'].unique())
-#print(df['year'].unique())
-#print(df['unit'].unique())
-#print(df['value'].unique())
+    #print(df.head())
+    #print(df.columns.unique())
+    #print(df['region'].unique())
+    #print(df['category'].unique())
+    #print(df['parameter'].unique())
+    #print('mode', df['mode'].unique())
+    #print(df['powertrain'].unique())
+    #print(df['year'].unique())
+    #print(df['unit'].unique())
+    #print(df['value'].unique())
+    pass
 
 # Electric Vehicles Sales
 EV_df = df[(df['parameter'] == 'EV sales') & (df['category'] == 'Historical')]
@@ -29,6 +31,7 @@ print(all_modes)
 
 # Most power trains sold
 power_trains_df = EV_df['powertrain'].value_counts()
+print(power_trains_df)
 
 # Electric Vehicles Sells Historical and Prediction
 ev = {}
@@ -87,4 +90,16 @@ ax.bar(e_vehicles_prediction_sells.keys(), e_vehicles_prediction_sells.values())
 ax.set_xlabel('Year')
 ax.set_ylabel('Amount')
 ax.set_title('Quantity of Electric Vehicles Prediction Sales Per Year 2024, 2025, 2030, 2035')
+plt.show()
+
+# Pie Chart - Electric Vehicles Sells Per Region 2011-2023 (Historical)
+
+region_value_df = EV_df[EV_df['region'] != 'World']
+region_value_df = region_value_df[['region', 'value']].groupby('region').sum()
+region_value_df = region_value_df.sort_values('value', ascending=False)
+region_value_df = region_value_df.head(15)
+fig, ax = plt.subplots()
+fig.set_size_inches(10, 10)
+ax.pie(region_value_df['value'], labels=region_value_df.index, autopct='%1.1f%%')
+ax.set_title('Electric Vehicles Sells Per Region 2011-2023')
 plt.show()
