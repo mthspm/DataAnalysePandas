@@ -15,4 +15,4 @@ Pandas is a library of Python that is used to manipulate and analyze data. It is
 - [x] Dota 2 Pick Analysis
 - [x] Electric Vehicles Sales Analysis
 - [x] F1 2000-2024 Analysis
-- [x] Global Growth Population
+- [x] Global Growth Population Analysis
